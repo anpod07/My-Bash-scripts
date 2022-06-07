@@ -1,0 +1,8 @@
+Client IP Address,Name,Lease Expiration,Type,Unique ID,Description
+172.21.9.11,csh-6055.nkmz.donetsk.ua,29.05.2020 7:11:50,DHCP,10604b67043c,
+172.21.9.12,csh-6054.nkmz.donetsk.ua,29.05.2020 7:13:59,DHCP,10604b67044c,
+172.21.9.13,csh-6056.nkmz.donetsk.ua,28.05.2020 13:21:07,DHCP,10604b65c83e,
+172.21.9.14,csh-6474.nkmz.donetsk.ua,29.05.2020 7:02:28,DHCP,e0d55e0c9374,
+172.21.9.15,csh-5038.nkmz.donetsk.ua,29.05.2020 11:13:25,DHCP,50e549dc3ce6,
+172.21.9.16,csh-6064.nkmz.donetsk.ua,25.05.2020 7:01:36,DHCP,94de80171214,
+172.21.9.29,Videoregistrator,Reservation (inactive),None,887799445522,Videoregistrator_CSH

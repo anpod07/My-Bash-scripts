@@ -1,0 +1,15 @@
+Client IP Address,Name,Lease Expiration,Type,Unique ID,Description
+192.168.51.50,ok-5591.nkmz.donetsk.ua,12.06.2020 8:13:15,DHCP,50e5498831a4,
+192.168.51.52,ok-6391.nkmz.donetsk.ua,12.06.2020 7:54:34,DHCP,1c1b0db8374d,
+192.168.51.53,ok-6495.nkmz.donetsk.ua,12.06.2020 8:03:03,DHCP,e0d55eb509e2,
+192.168.51.54,ok-6224.nkmz.donetsk.ua,12.06.2020 7:59:06,DHCP,1c1b0d2587d4,
+192.168.51.55,ok-4481.nkmz.donetsk.ua,09.05.2020 12:01:07,DHCP,00016cb526fb,
+192.168.51.56,NKMZ-6286.nkmz.donetsk.ua,12.06.2020 12:37:41,DHCP,1c1b0db9cac1,
+192.168.51.57,ok-3908.,02.05.2020 9:06:10,DHCP,00112fadbe09,
+192.168.51.58,CanonBBECD6.nkmz.donetsk.ua,12.06.2020 7:52:30,DHCP,f48139bbecd6,
+192.168.51.59,ok-3912.,09.05.2020 12:41:11,DHCP,00112fae8432,
+192.168.51.60,ok-6113.nkmz.donetsk.ua,12.06.2020 7:51:12,DHCP,408d5c6294f9,
+192.168.51.61,ok_2737.nkmz.donetsk.ua,30.04.2020 8:56:39,DHCP,00e018994031,
+192.168.51.62,ok-6285.nkmz.donetsk.ua,12.06.2020 7:46:09,DHCP,1c1b0db835d9,
+192.168.51.63,ok-5552.nkmz.donetsk.ua,12.06.2020 9:19:41,DHCP,1c6f65c12306,
+192.168.51.90,CanonBD3A13.nkmz.donetsk.ua,Reservation (active),DHCP,f48139bd3a13,CanonBD3A13

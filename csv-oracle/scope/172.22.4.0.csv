@@ -1,0 +1,9 @@
+Client IP Address,Name,Lease Expiration,Type,Unique ID,Description
+172.22.4.10,gps-2.,09.06.2020 20:01:02,DHCP,1c6f65c124b9,
+172.22.4.13,GPS-5605.nkmz.donetsk.ua,30.05.2020 23:17:03,DHCP,50e5498829a2,
+172.22.4.14,gps-2.nkmz.donetsk.ua,Reservation (inactive),None,001a92671eef,gps-2.nkmz.donetsk.ua
+172.22.4.15,gps-5944.nkmz.donetsk.ua,05.06.2020 10:19:40,DHCP,902b3409c730,
+172.22.4.16,gps-2024.nkmz.donetsk.ua,12.06.2020 6:20:50,DHCP,00155848e0d4,
+172.22.4.17,GPS-4048.nkmz.donetsk.ua,12.06.2020 6:13:13,DHCP,00c026a16eb4,
+172.22.4.19,gps-3448.nkmz.donetsk.ua,05.06.2020 7:01:48,DHCP,00c026a151df,
+172.22.4.20,gps-2636.,12.06.2020 6:48:11,DHCP,00c026a1578f,

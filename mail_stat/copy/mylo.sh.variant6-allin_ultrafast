@@ -1,0 +1,136 @@
+#!/usr/local/bin/bash
+#
+#fl="mail.log.10"
+fl="mail.log.0"
+#flm="maillog.14.gz"
+flm="maillog.0.gz"
+cd /root/scripts/mail_stat_new
+# разбиваем архив файлы, файл = письмо
+cd ./mess
+rm 0*
+cat ../$fl | split -p "^From " -d -a5 - 0
+echo "Splitting of $fl - complite!"
+cd ..
+# функция для устанения мусора в финальных строках From: и To:
+funk ()
+{
+ arr2=(); k=0
+# echo "111 = $1"
+ arr2=(`echo "$1" | tr ";" " " | tr -d "<" | tr -d ">" | tr -d ","`)
+ while [ -n "${arr2[k]}" ]; do
+  if grep -q "@\|undisclosed-recipient" <<< ${arr2[k]}; then
+   echo -n " ${arr2[k]}" >> zzz
+#   echo "funk: ${arr2[k]}"
+  fi
+  ((k++))
+ done
+ echo "" >> zzz
+# echo "nnn"; read nnn
+}
+# массив файлов-писем суточного архива
+arr=(`ls ./mess`)
+i=0; :>zzz
+while [ -n "${arr[i]}" ]; do
+# echo -n `head -n1 ./mess/${arr[i]} | awk '{print $7"_"$4"_"$5"_"$6}'` >> zzz		# !!! вписал Дату
+ echo `head -n1 ./mess/${arr[i]} | awk '{print $7"_"$4"_"$5"_"$6}'` >> zzz		# !!! вписал Дату
+ # === Достаем From: ===
+ ar0=(`grep -n "^From: " ./mess/${arr[i]} | /usr/local/bin/recode -f KOI8-R..UTF-8 | tr " " ";"`)
+ if grep -q "@" <<< "${ar0[0]}"				# если строка содержит '@'
+#  then echo -n "; ${ar0[0]};" >> zzz			# !!! вписал From:
+#  then echo "${ar0[0]}" >> zzz				# !!! вписал From:
+  then funk `echo ${ar0[0]} | tr " " ";"`		# !!! вписал From:
+  else
+   k1=`echo ${ar0[0]} | awk -F: '{print $1}'`		# номер текущей строки
+   ext=$k1						# сохраняем номер первой строки поиска
+   y=""
+   while [ -z "$y" ]; do
+    ((k1++))
+    if [ $(($k1-$ext)) -eq 10 ]				# экстренный выход из цикла, если число повторений достигло 10
+     then
+      y=a
+      echo "undisclosed_sender" >> zzz
+     else
+      k2=`awk '(NR==x1)' x1="$k1" ./mess/${arr[i]}`	# проверяемая строка
+      if grep -q "@" <<< "$k2"
+       then
+        y=a
+        echo "$k1 : $k2"
+#        echo -n "; $k2;" >> zzz			# !!! вписал From:
+#        echo "$k2" >> zzz				# !!! вписал From:
+        funk `echo $k2 | tr " " ";"`			# !!! вписал From:
+      fi
+    fi
+   done
+ fi
+ # === Достаем To: ===
+ ar0=(`grep -n "^To: " ./mess/${arr[i]} | /usr/local/bin/recode -f KOI8-R..UTF-8 | tr " " ";"`)
+ if [ -z "${ar0[0]}" ]					# если строка с To: не найдена, берем первую строку из CC:
+  then
+   ar0=(`grep -n "^CC: " ./mess/${arr[i]} | /usr/local/bin/recode -f KOI8-R..UTF-8 | tr " " ";"`)
+   if [ -z "${ar0[0]}" ]; then ar0[0]="undisclosed"	# если и строка с CC: пустая, то пишем "undisclosed"
+   fi
+ fi
+ if grep -qi "undisclosed" <<< "${ar0[0]}"		# !!! если получатель неизвестен - так и пишем
+  then echo "undisclosed-recipient" >> zzz
+  else
+   if grep -q "@" <<< "${ar0[0]}"			# если строка содержит '@'
+    then
+     if grep -q ':To:.*,$' <<< "${ar0[0]}"		# если письмо отправлено на несколько адресов (в конце - запятая)
+      then
+#       echo ","; read nnn
+       k1=`echo ${ar0[0]} | awk -F: '{print $1}'`	# номер текущей строки
+#       echo $k1
+       str=${ar0[0]}					# текущая строка
+#       echo "str=$str"
+       y=""
+       while [ -z "$y" ]; do
+        ((k1++))					# берем номер следующей строки
+        k2=`awk '(NR==x1)' x1="$k1" ./mess/${arr[i]}`	# следующая строка
+        str+=$k2					# дописываем к текущей строке следующую
+        if grep -qv ',$' <<< "$k2"			# если в конце - не запятая, выводим строку с несколькими отправителями
+         then y=a; echo "$k1 ::: $str"
+#         echo $str >> zzz				# !!! вписываем строку To: с несколькими отправителями
+	  funk `echo $str | tr " " ";"`
+        fi
+       done
+      else
+#       echo "${ar0[0]}" >> zzz				# !!! вписываем To:
+       funk `echo ${ar0[0]} | tr " " ";"`		# !!! вписываем To:
+     fi
+    else
+     k1=`echo ${ar0[0]} | awk -F: '{print $1}'`		# номер текущей строки
+     ext=$k1						# сохраняем номер первой строки поиска
+     y=""
+     while [ -z "$y" ]; do
+      ((k1++))
+#      echo "ext=$ext"
+#      echo "k1=$k1"
+#      read nnn
+      if [ $(($k1-$ext)) -eq 5 ]			# экстренный выход из цикла, если число повторений достигло 5
+       then
+        y=a
+        echo "undisclosed_recipient" >> zzz
+       else
+        k2=`awk '(NR==x1)' x1="$k1" ./mess/${arr[i]}`	# проверяемая строка
+        if grep -q "@" <<< "$k2"
+         then
+          y=a
+          echo "$k1 :: $k2"
+#          echo "$k2" >> zzz				# !!! вписал To:
+          funk `echo $k2 | tr " " ";"`			# !!! вписал To:
+        fi
+      fi
+     done
+   fi
+ fi
+ ((i++))
+done
+# Формирую список: Дата ; Отправитель ; Получатель
+awk '{if (match($0,"^20")) {s1=$0; getline; s2=$0; getline; s3=$0; print s1 ";" s2 ";" s3}}' zzz > zzz1
+# Получаем файл с датой и размером писем
+d=`stat -t "%Y" $flm | awk '{print $10}' | tr -d '"'`
+zgrep 'MAILER-DAEMON@nkmz.donetsk.ua.*size' $flm | awk '{print x1"_"$1"_"$2"_"$3";"$8}' x1=$d | tr -d "," | tr -d "size="  > zzz2
+# Сталкиваем zzz1 и zzz2 по дате
+awk -F ";" '{{if (FILENAME == "zzz2") {pop[$1] = $2; next}} \
+             {if (FILENAME != "zzz2") {print $0 "; " pop[$1]}}}' zzz2 zzz1 > result
+rm zzz zzz1 zzz2

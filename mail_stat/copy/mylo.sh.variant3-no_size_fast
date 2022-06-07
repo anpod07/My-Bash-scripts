@@ -1,0 +1,95 @@
+#!/usr/local/bin/bash
+#
+# Почтовая статистика, анализирующая заголовки писем из архива (/usr/mail.log)
+#
+fl=mail.log.10
+i=0; :>zzz
+# Функция для избавления от мусора строк 'From:' и 'To:'
+#funk()
+#{
+# arr2=(`echo $1 | tr ";" " " | tr -d "<" | tr -d ">" | tr -d ","`)
+# j=0; str1=""
+# while [ -n "${arr2[j]}" ]; do
+#  if grep -q "@" <<< ${arr2[j]}; then
+#   str1+="${arr2[j]} "
+##   echo -n "${arr2[j]} " >> zzz
+#  fi
+#  ((j++))
+# done
+## echo '' >> zzz
+# echo $str1 >> zzz
+#}
+# Приводим к виду: Дата ; From: ; To
+# После Даты берем только по одной строке с From: и To:
+grep -n '^From \|^From: \|^To: ' $fl |\
+awk '{if (match($0,":From ")) {s1=$7"_"$4"_"$5"_"$6; getline; \
+	    {if (match($0,":From: ")) {s2=$0; getline; s3=$0; printf "%s\n%s\n%s\n",s1,s2,s3} \
+	     else {s3=$0; getline; s2=$0; printf "%s\n%s\n%s\n",s1,s2,s3}}}}' | tr " " ";" > zzz
+arr=(`cat zzz`); :>zzz
+# Ищем адреса с '@' в полях From: и To: по номеру строки
+while [ -n "${arr[i]}" ]; do
+ if grep -q "^20[0-9][0-9]_" <<< "${arr[i]}"
+  then
+   echo ${arr[i]} >> zzz				# !!! вписываем дату
+  else
+   if grep -q "undisclosed-recipients" <<< "${arr[i]}"	# !!! если получатель неизвестен - так и пишем
+    then echo "undisclosed-recipient" >> zzz
+    else
+     if grep -q "@" <<< "${arr[i]}"			# если строка содержит '@'
+      then
+       if grep -q ':To:.*,$' <<< "${arr[i]}"		# если письмо отправлено на несколько адресов (в конце - запятая)
+        then
+         k1=`echo ${arr[i]} | awk -F: '{print $1}'`	# номер текущей строки
+         str=${arr[i]}					# текущая строка
+         while [ -z "$y" ]; do
+          ((k1++))					# берем номер следующей строки
+          k2=`awk '(NR==x1)' x1="$k1" $fl`		# следующая строка
+          str+=$k2					# дописываем к текущес строке следующую
+          if grep -qv ',$' <<< "$k2"			# если в конце - не запятая, выводим строку с несколькими отправителями
+           then y=a; echo "$k1 ::: $str"
+            echo $str >> zzz				# !!! вписываем строку с несколькими отправителями
+#	    funk $str
+          fi
+         done
+        else
+         echo ${arr[i]} >> zzz				# !!! вписываем отправителя/получателя
+#	 funk ${arr[i]}
+       fi
+      else
+       k1=`echo ${arr[i]} | awk -F: '{print $1}'`	# номер текущей строки
+       while [ -z "$y" ]; do
+        ((k1++))					# номер следующей строки, с которой начинаем поиск '@'
+        k2=`awk '(NR==x1)' x1="$k1" $fl`		# проверяемая строка
+        if grep -q "@" <<< "$k2"
+         then
+          if grep -q ':To:.*,$' <<< "$k2"		# проверка на несколько адресатов (см. выше)
+           then
+            k3=$k1
+            str=$k2
+            while [ -z "$y1" ]; do
+             ((k3++))
+             k4=`awk '(NR==x1)' x1="$k3" $fl`
+             str+=$k4
+             if grep -qv ',$' <<< "$k4"
+              then y1=a; echo "$k3 ::: $str"
+               echo $str >> zzz				# !!! вписываем строку с несколькими отправителями
+#	       funk $str
+             fi
+            done
+           else
+            y=a
+            echo "$k1 : $k2"
+            echo $k2 >> zzz				# !!! вписываем найденный адрес отправителя/получателя
+#	    funk $k2
+          fi
+        fi
+       done
+     fi
+   fi
+ fi
+ ((i++)); y=""
+done
+# Формирую список: Дата ; Отправитель ; Получатель
+#awk -F "<" '{if ($0 ~ "<") {print $2} else {print $0}}' _1 | sed 's/([^)]*)//g' |\
+#awk -F ": " '{if ($0 ~ ": ") {print $2} else {print $0}}' | tr -d " " | tr -d ">" |\
+#awk '{if (match($0,"^20")) {s1=$0; getline; s2=$0; getline; s3=$0; print s1 ";" s2 ";" s3}}' > zzz

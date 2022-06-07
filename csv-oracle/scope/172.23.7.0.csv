@@ -1,0 +1,31 @@
+Client IP Address,Name,Lease Expiration,Type,Unique ID,Description
+172.23.7.10,gdc-4207.nkmz.donetsk.ua,12.06.2020 6:58:55,DHCP,0030843a3fb5,
+172.23.7.11,nkmz-5624.nkmz.donetsk.ua,Reservation (active),DHCP,1c6f65771ecc,
+172.23.7.12,BAD_ADDRESS,28.04.2020 13:49:23,DHCP,0c0717ac,Этот IP-адрес уже используется
+172.23.7.13,gdc-2798.nkmz.donetsk.ua,12.06.2020 7:25:47,DHCP,00e01899572c,
+172.23.7.14,gdc-2314.nkmz.donetsk.ua,20.05.2020 6:20:18,DHCP,RAS,
+172.23.7.15,rez1,Reservation (inactive),None,1001,150808
+172.23.7.16,gdc_4622.nkmz.donetsk.ua,12.06.2020 12:48:37,DHCP,00112fadc63c,
+172.23.7.17,gdc-2314.nkmz.donetsk.ua,20.05.2020 6:20:18,DHCP,RAS,
+172.23.7.18,18,Reservation (inactive),None,5cd998f81ec3,
+172.23.7.19,gdc-1855.nkmz.donetsk.ua,12.06.2020 10:55:25,DHCP,00c026a15bc9,
+172.23.7.20,GDC-6188.nkmz.donetsk.ua,12.06.2020 6:38:42,DHCP,408d5caa3604,
+172.23.7.21,gdc-4624.nkmz.donetsk.ua,12.06.2020 8:16:31,DHCP,0017314ac5a7,
+172.23.7.22,gdc-4675.nkmz.donetsk.ua,12.06.2020 7:04:47,DHCP,001a929581d5,
+172.23.7.23,gdc-4206.nkmz.donetsk.ua,12.06.2020 6:57:15,DHCP,000ea64d84ea,
+172.23.7.24,gdc-2440.nkmz.donetsk.ua,12.06.2020 6:46:02,DHCP,00c026a87ce1,
+172.23.7.25,gdc-4195.nkmz.donetsk.ua,12.06.2020 7:09:22,DHCP,00c026a4a0b0,
+172.23.7.26,vrczl1.nkmz.donetsk.ua,Reservation (active),DHCP,0012172eccf5,vrczl1
+172.23.7.27,NKMZ-3636.,12.06.2020 6:42:41,DHCP,000ea688e9e1,
+172.23.7.28,gdc-2314.,20.05.2020 6:18:49,DHCP,00e01826fec9,
+172.23.7.29,gdc-2538.nkmz.donetsk.ua,11.06.2020 21:19:13,DHCP,00c026a153cd,
+172.23.7.30,BAD_ADDRESS,28.04.2020 13:49:23,DHCP,1e0717ac,Этот IP-адрес уже используется
+172.23.7.31,gdc-5527.nkmz.donetsk.ua,Reservation (inactive),None,7778555579,
+172.23.7.32,gdc-3729.nkmz.donetsk.ua,15.05.2020 8:34:01,DHCP,000c6ee8a8ee,
+172.23.7.33,gdc-2560.,11.06.2020 8:39:44,DHCP,00e01875a2c5,
+172.23.7.34,gdc-4625.nkmz.donetsk.ua,12.06.2020 9:35:01,DHCP,000ea64f9411,
+172.23.7.35,gdc-4204.nkmz.donetsk.ua,11.06.2020 12:40:27,DHCP,5cd998f81e82,
+172.23.7.36,gdc_4622.nkmz.donetsk.ua,12.06.2020 12:49:28,DHCP,RAS,
+172.23.7.37,nkmz-6815.nkmz.donetsk.ua,12.06.2020 11:42:59,DHCP,04d9f5ad1294,
+172.23.7.40,Videoregistrator_GDC,Reservation (inactive),None,0012129cb998,ЖД весы
+172.23.7.100,switch,Reservation (inactive),None,112233445566,

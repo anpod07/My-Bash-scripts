@@ -1,0 +1,15 @@
+Client IP Address,Name,Lease Expiration,Type,Unique ID,Description
+192.168.57.50,nkmz-6534.nkmz.donetsk.ua,12.06.2020 8:10:38,DHCP,e0d55eb7edb5,
+192.168.57.51,ahu-3505.nkmz.donetsk.ua,Reservation (inactive),None,0356754367,
+192.168.57.52,Приемная.nkmz.donetsk.ua,Reservation (inactive),None,00804812bb8d,старый IP был 192.168.57.64
+192.168.57.53,ahu-2442.nkmz.donetsk.ua,12.06.2020 8:03:44,DHCP,00c026a89e07,
+192.168.57.54,asu-2518,Reservation (inactive),None,0770875457,
+192.168.57.56,ahu-6274.nkmz.donetsk.ua,07.06.2020 7:55:32,DHCP,3065eca57353,
+192.168.57.57,ahu-1971.,Reservation (active),DHCP,000021ff9aac,
+192.168.57.58,ahu-2847.nkmz.donetsk.ua,12.06.2020 8:08:52,DHCP,00e018636a68,
+192.168.57.60,nkmz-5096.nkmz.donetsk.ua,12.06.2020 7:40:36,DHCP,0024545d374b,
+192.168.57.61,ahu-1971.,12.06.2020 10:06:20,DHCP,000c6e06f867,
+192.168.57.62,computer-b3929e.,10.05.2020 9:00:20,DHCP,0016360d7147,
+192.168.57.63,ahu-2519.,12.06.2020 8:21:19,DHCP,00e0186971d3,
+192.168.57.64,ahu-6099.nkmz.donetsk.ua,12.06.2020 9:32:29,DHCP,408d5c66a300,
+192.168.57.65,ahu-5328.nkmz.donetsk.ua,12.06.2020 8:22:04,DHCP,1c6f65ad7b51,

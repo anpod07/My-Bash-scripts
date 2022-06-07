@@ -1,0 +1,19 @@
+nku:		34akulenko
+nku:		akulenko12
+nku:		akulenko
+akulenko:	somewhere
+akulenko:	akulenko12, somewhere_else
+akulenko:	34akulenko, somewhere_else
+akulenko: akulenko, somewhere_else
+akulenko:	somewhere, akulenko12
+akulenko:	somewhere, 34akulenko
+akulenko:	somewhere, akulenko
+vagon:		akulenko12, lsa, osim, lvv, fuel, ferro
+vagon:		34akulenko, lsa, osim, lvv, fuel, ferro
+vagon: 		 akulenko, lsa, osim, lvv, fuel, ferro
+formalom:	lvv, ferro, splav, akulenko12, fuel, metlom, osim, lsa
+formalom:	lvv, ferro, splav, 34akulenko, fuel, metlom, osim, lsa
+formalom:	lvv, ferro, splav, akulenko, fuel, metlom, osim, lsa
+breo-nsl:	breo-nsl, kgro-msl, akulenko12
+breo-nsl:	breo-nsl, kgro-msl, 34akulenko
+breo-nsl:	breo-nsl, kgro-msl, akulenko

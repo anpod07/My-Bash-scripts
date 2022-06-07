@@ -1,0 +1,115 @@
+#!/usr/local/bin/bash
+#
+# Почтовая статистика, анализирующая заголовки писем из архива (/usr/mail.log)
+#
+#fl="mail.log.0.gz"
+#fl="mail.log.10"
+fl="mail.log.0"
+#flm="maillog.0.gz"
+#flm="maillog.14.gz"
+flm="maillog.0.gz"
+i=0; :>zzz
+# Приводим к виду: Дата ; From: ; To
+# После Даты берем только по одной строке с From: и To:
+grep -n '^From \|^From: \|^To: ' $fl | /usr/local/bin/recode -f KOI8-R..UTF-8 |\
+awk '{if (match($0,":From ")) {s1=$7"_"$4"_"$5"_"$6; getline; \
+      {if (match($0,":From: ")) {s2=$0; getline; s3=$0; printf "%s\n%s\n%s\n",s1,s2,s3} \
+       else {s3=$0; getline; s2=$0; printf "%s\n%s\n%s\n",s1,s2,s3}}}}' | tr " " ";" > zzz
+echo "DONE 1"
+arr=(`cat zzz`); :>zzz
+# Ищем адреса с '@' в полях From: и To: по номеру строки
+while [ -n "${arr[i]}" ]; do
+ if grep -q "^20[0-9][0-9]_" <<< "${arr[i]}"
+  then
+   echo ${arr[i]} >> zzz				# !!! вписываем дату
+  else
+   if grep -q "undisclosed-recipients" <<< "${arr[i]}"	# !!! если получатель неизвестен - так и пишем
+    then echo "undisclosed-recipient" >> zzz
+    else
+     if grep -q "@" <<< "${arr[i]}"			# если строка содержит '@'
+      then
+       if grep -q ':To:.*,$' <<< "${arr[i]}"		# если письмо отправлено на несколько адресов (в конце - запятая)
+        then
+         k1=`echo ${arr[i]} | awk -F: '{print $1}'`	# номер текущей строки
+         str=${arr[i]}					# текущая строка
+         while [ -z "$y" ]; do
+          ((k1++))					# берем номер следующей строки
+          k2=`awk '(NR==x1)' x1="$k1" $fl`		# следующая строка
+          str+=$k2					# дописываем к текущес строке следующую
+          if grep -qv ',$' <<< "$k2"			# если в конце - не запятая, выводим строку с несколькими отправителями
+           then y=a; echo "$k1 ::: $str"
+            echo $str >> zzz				# !!! вписываем строку с несколькими отправителями
+          fi
+         done
+        else
+         echo ${arr[i]} >> zzz				# !!! вписываем отправителя/получателя
+       fi
+      else
+       k1=`echo ${arr[i]} | awk -F: '{print $1}'`	# номер текущей строки
+       while [ -z "$y" ]; do
+        ((k1++))					# номер следующей строки, с которой начинаем поиск '@'
+        k2=`awk '(NR==x1)' x1="$k1" $fl`		# проверяемая строка
+        if grep -q "@" <<< "$k2"
+         then
+          if grep -q ':To:.*,$' <<< "$k2"		# проверка на несколько адресатов (см. выше)
+           then
+            k3=$k1
+            str=$k2
+            while [ -z "$y1" ]; do
+             ((k3++))
+             k4=`awk '(NR==x1)' x1="$k3" $fl`
+             str+=$k4
+             if grep -qv ',$' <<< "$k4"
+              then y1=a; echo "$k3 ::: $str"
+               echo $str >> zzz				# !!! вписываем строку с несколькими отправителями
+             fi
+            done
+           else
+            y=a
+            echo "$k1 : $k2"
+            echo $k2 >> zzz				# !!! вписываем найденный адрес отправителя/получателя
+          fi
+        fi
+       done
+     fi
+   fi
+ fi
+ ((i++)); y=""
+done
+# Формирую список: Дата ; Отправители ; Получатели
+arr=(); i=0; k=0; :>zzz1
+arr=(`tr " " ";" < zzz`)
+while [ -n "${arr[i]}" ]; do
+ echo -n "${arr[i]};" >> zzz1
+ echo "DATA: ${arr[i]}"
+ ((i++))
+ arr2=(); k=0
+ arr2=(`echo ${arr[i]} | tr ";" " " | tr -d "<" | tr -d ">" | tr -d ","`)
+ while [ -n "${arr2[k]}" ]; do
+  if grep -q "@\|undisclosed-recipient" <<< ${arr2[k]}; then
+   echo -n " ${arr2[k]}" >> zzz1
+   echo "FROM: ${arr2[k]}"
+  fi
+  ((k++))
+ done
+ echo -n ";" >> zzz1
+ ((i++))
+ arr2=(); k=0
+ arr2=(`echo ${arr[i]} | tr ";" " " | tr -d "<" | tr -d ">" | tr -d ","`)
+ while [ -n "${arr2[k]}" ]; do
+  if grep -q "@\|undisclosed-recipient" <<< ${arr2[k]}; then
+   echo -n " ${arr2[k]}" >> zzz1
+   echo "TO:   ${arr2[k]}"
+  fi
+  ((k++))
+ done
+ echo '' >> zzz1
+ ((i++))
+done
+# Получаем файл с датой и размером писем
+d=`stat -t "%Y" $flm | awk '{print $10}' | tr -d '"'`
+zgrep 'MAILER-DAEMON@nkmz.donetsk.ua.*size' $flm | awk '{print x1"_"$1"_"$2"_"$3";"$8}' x1=$d | tr -d "," | tr -d "size="  > zzz2
+# Сталкиваем zzz1 и zzz2 по дате
+awk -F ";" '{{if (FILENAME == "zzz2") {pop[$1] = $2; next}} \
+             {if (FILENAME != "zzz2") {print $0 "; " pop[$1]}}}' zzz2 zzz1 > result
+rm zzz zzz1 zzz2

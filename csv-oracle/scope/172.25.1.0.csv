@@ -1,0 +1,33 @@
+Client IP Address,Name,Lease Expiration,Type,Unique ID,Description
+172.25.1.10,nkmz-5189.nkmz.donetsk.ua,Infinite,DHCP,1c6f65769a89,
+172.25.1.11,dirnkmz-5772.nkmz.donetsk.ua,Reservation (active),DHCP,902b34986875,Voloshin
+172.25.1.12,nkmz-6186.nkmz.donetsk.ua,Infinite,DHCP,408d5caa431e,
+172.25.1.13,Home.,Reservation (active),DHCP,0000e27b9119,Savenko
+172.25.1.14,NKMZ-5342.nkmz.donetsk.ua,Infinite,DHCP,1c6f65ad7f75,
+172.25.1.15,dir-5125.nkmz.donetsk.ua,Infinite,DHCP,00241ddb7279,
+172.25.1.17,oiao-asus.nkmz.donetsk.ua,Infinite,DHCP,14dae93ead2f,
+172.25.1.18,dirnkmz-6061.nkmz.donetsk.ua,Infinite,DHCP,901b0e2c6110,
+172.25.1.19,zverdvd1.nkmz.donetsk.ua,Infinite,DHCP,000c29168811,
+172.25.1.20,nkmzR,Reservation (inactive),None,6cf049a4904d,
+172.25.1.21,NKMZ-HP.nkmz.donetsk.ua,Infinite,DHCP,705a0f2118c2,
+172.25.1.22,nkmz-3560.nkmz.donetsk.ua,Reservation (active),DHCP,000ea64b06bc,ПК президента
+172.25.1.23,nkmz-6387.gb.nkmz.donetsk.ua,Infinite,DHCP,1c1b0db9c0d8,
+172.25.1.24,nkmz-5634.nkmz.donetsk.ua,Infinite,DHCP,c8600058f727,
+172.25.1.25,NKMZ-5867.nkmz.donetsk.ua,Infinite,DHCP,902b349d5eae,
+172.25.1.26,NKMZ-5867.nkmz.donetsk.ua,Infinite,DHCP,4cedfbcb9094,
+172.25.1.27,nkmz17.nkmz.donetsk.ua,Infinite,DHCP,e81132d3cda5,
+172.25.1.28,android-9ff3b5d5c70ab201.nkmz.donetsk.ua,Infinite,DHCP,2827bf5da0db,
+172.25.1.29,dirnkmz-5129.nkmz.donetsk.ua,Infinite,DHCP,d0509922641c,
+172.25.1.30,nkmz-5189.nkmz.donetsk.ua,Infinite,DHCP,1c1b0ddaeccc,
+172.25.1.31,vai_tender.nkmz.donetsk.ua,Infinite,DHCP,9c146394ca84,
+172.25.1.32,WIFI_manager,Reservation (inactive),None,22222222222333,
+172.25.1.33,Savenko_WIFI,Reservation (inactive),None,0122222221,
+172.25.1.34,Voloshin_WIFI.nkmz.donetsk.ua,Reservation (active),DHCP,00904c910001,
+172.25.1.35,приемная президента,Reservation (inactive),None,0765398775,dirnkmz-5129
+172.25.1.36,Director.nkmz.donetsk.ua,Infinite,DHCP,f09fc29a9509,
+172.25.1.37,anr-asus.nkmz.donetsk.ua,Infinite,DHCP,14dae93eae03,
+172.25.1.38,HP-dv7.nkmz.donetsk.ua,Infinite,DHCP,2c27d7a69ebe,
+172.25.1.39,ENG1SavenkoEI.nkmz.donetsk.ua,Infinite,DHCP,f09fc29a993e,
+172.25.1.40,OVPopov-PC.nkmz.donetsk.ua,Infinite,DHCP,902b34acd6cc,
+172.25.1.41,nkmz-konf.nkmz.donetsk.ua,Infinite,DHCP,f8b46ab7cc9e,
+172.25.1.42,nkmz-6856.nkmz.donetsk.ua,Infinite,DHCP,040e3cefa525,

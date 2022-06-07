@@ -1,0 +1,18 @@
+Client IP Address,Name,Lease Expiration,Type,Unique ID,Description
+172.23.8.10,NKMZ-6813.nkmz.donetsk.ua,12.06.2020 10:39:11,DHCP,04d9f5ace713,
+172.23.8.11,OGMEC-4445.nkmz.donetsk.ua,12.06.2020 6:06:23,DHCP,000021037cf4,
+172.23.8.12,nkmz-6552.nkmz.donetsk.ua,12.06.2020 6:58:11,DHCP,e0d55ebe1c1b,
+172.23.8.13,nkmz-6553.nkmz.donetsk.ua,12.06.2020 6:51:25,DHCP,e0d55eb7ed2f,
+172.23.8.14,elceh-1527-a.nkmz.donetsk.ua,12.06.2020 6:53:15,DHCP,00e018995550,
+172.23.8.16,elceh-3867.,12.06.2020 6:54:20,DHCP,00112fadb605,
+172.23.8.17,elceh-2416.,12.06.2020 7:28:46,DHCP,000021ff9aac,
+172.23.8.18,elceh-2484.,12.06.2020 7:33:38,DHCP,00c026a15bd4,
+172.23.8.19,elceh-2717.,12.06.2020 8:15:54,DHCP,000ea62a6ee2,
+172.23.8.21,elceh-2425.nkmz.donetsk.ua,12.06.2020 12:17:12,DHCP,00c026a8a225,
+172.23.8.23,oge-3378.nkmz.donetsk.ua,12.06.2020 10:30:11,DHCP,00a0d21d8b60,
+172.23.8.24,Elceh-1933.nkmz.donetsk.ua,12.06.2020 5:41:52,DHCP,000c6eb2a8e7,
+172.23.8.25,elceh-2567.nkmz.donetsk.ua,11.06.2020 6:47:42,DHCP,5cd998f81eb9,
+172.23.8.27,vrczl2.nkmz.donetsk.ua,Reservation (active),DHCP,0012172e91bf,vrzcl2
+172.23.8.28,elceh-4644.nkmz.donetsk.ua,12.06.2020 7:16:11,DHCP,000021037d01,
+172.23.8.29,elceh-1539.nkmz.donetsk.ua,08.06.2020 15:06:41,DHCP,00c128013835,
+172.23.8.100,switch,Reservation (inactive),None,112233445566,

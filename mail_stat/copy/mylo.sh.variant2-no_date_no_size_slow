@@ -1,0 +1,59 @@
+#!/usr/local/bin/bash
+#
+fl=mail.log.10
+i=0; :>_1
+# создаем массим '^From ' с порядкомым номером строки
+ada=(`grep -n '^From ' $fl | awk '{print $1 ";" $7 "_" $4 "_" $5 "_" $6}'`)
+# ищем после '^From ' первое совпадение для '^From: ', затем - '^To: '
+while [ -n "${ada[i]}" ]; do
+ echo ${ada[i]} | awk -F ";" '{print $2}' >> _1	# !!! вписал '^From '
+ n1=`echo ${ada[i]} | awk -F: '{print $1}'`	# номер строки '^From '
+ echo "n1=$n1"
+ y=""; k1=$n1
+ while [ -z "$y" ]; do				# ищем '^From: ', пока не найдем
+  ((k1++))					# номер следующей строки для проверки
+#  echo "k1=$k1"
+  k2=`awk '(NR==x1)' x1="$k1" $fl`		# проверяемая строка
+#  echo "k2=$k2"
+   if grep -q "^From: " <<< "$k2"; then
+    while [ -z "$y" ]; do
+     if grep -q "@" <<< "$k2"
+      then y=a; echo "$k1 : =FROM= $k2"
+       echo $k2 >> _1				# !!! вписал '^From: '
+      else					# иначе ищем в следующей строке
+       ((k1++))
+       k2=`awk '(NR==x1)' x1="$k1" $fl`
+#       echo "k1=$k1"; echo "k2=$k2"; read n
+     fi
+    done
+   fi
+ done
+ y=""; k1=$n1
+ while [ -z "$y" ]; do				# ищем '^To: ', пока не найдем
+  ((k1++))
+#  echo "k1=$k1"
+  k2=`awk '(NR==x1)' x1="$k1" $fl`
+  if grep -q "undisclosed-recipient" <<< "$k2"	# !! если адресат неопределен - так и вписываем
+   then echo "$k1:To:;undisclosed-recipient" >> _1
+   else
+    if grep -q "^To: " <<< "$k2"; then
+     while [ -z "$y" ]; do
+      if grep -q "@" <<< "$k2"
+       then y=a; echo "$k1 : =TO= $k2"
+        echo $k2 >> _1				# !!! вписал '^To: '
+       else
+        ((k1++))
+        k2=`awk '(NR==x1)' x1="$k1" $fl`
+#        echo "k1=$k1"; echo "k2=$k2"; read n
+      fi
+     done
+    fi
+  fi
+ done
+ ((i++))
+ echo "===" >> _1
+done
+# Формирую список: Дата ; Отправитель ; Получатель
+awk -F "<" '{if ($0 ~ "<") {print $2} else {print $0}}' _1 | sed 's/([^)]*)//g' |\
+awk -F ": " '{if ($0 ~ ": ") {print $2} else {print $0}}' | tr -d " " | tr -d ">" |\
+awk '{if (match($0,"^20")) {s1=$0; getline; s2=$0; getline; s3=$0; print s1 ";" s2 ";" s3}}' > zzz

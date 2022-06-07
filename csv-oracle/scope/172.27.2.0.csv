@@ -1,0 +1,13 @@
+Client IP Address,Name,Lease Expiration,Type,Unique ID,Description
+172.27.2.20,bsa.nkmz.donetsk.ua,12.06.2020 6:08:11,DHCP,14dae9a41acf,
+172.27.2.21,SEP00070E36F59C.nkmz.donetsk.ua,12.06.2020 8:00:12,DHCP,00070e36f59c,
+172.27.2.22,ilo-sma2.nkmz.donetsk.ua,01.05.2020 9:49:47,DHCP,001cc4591738,
+172.27.2.23,bsi.nkmz.donetsk.ua,12.06.2020 7:38:05,DHCP,00e018998877,
+172.27.2.24,pCOWeb1FC284.nkmz.donetsk.ua,01.06.2020 7:41:07,DHCP,000a5c1fc284,
+172.27.2.25,LocalHost.nkmz.donetsk.ua,Reservation (active),DHCP,000c30a4ed64,
+172.27.2.28,SEP00070E36F959.nkmz.donetsk.ua,12.06.2020 7:46:06,DHCP,00070e36f959,
+172.27.2.29,77,Reservation (inactive),None,045788548549,
+172.27.2.30,osto-6162.nkmz.donetsk.ua,Reservation (active),DHCP,408d5c629101,
+172.27.2.35,SEP00070E36F636.nkmz.donetsk.ua,12.06.2020 7:41:35,DHCP,00070e36f636,
+172.27.2.38,osto-6400.nkmz.donetsk.ua,12.06.2020 7:42:04,DHCP,f46d04e80827,
+172.27.2.50,note.nkmz.donetsk.ua,Reservation (active),DHCP,14dae93eae10,
